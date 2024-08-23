@@ -60,8 +60,8 @@ st.markdown(
 )
 
 # Title and Header
-st.markdown("<h1 class='title'>Information Extraction and Retrieval App</h1>", unsafe_allow_html=True)
-st.markdown("<h2 class='header'>Engage in Conversational Queries with Your Documents</h2>", unsafe_allow_html=True)
+st.markdown("<h1 class='title'>Information Retrieval App</h1>", unsafe_allow_html=True)
+st.markdown("<h2 class='header'Conversational Queries with Your Documents</h2>", unsafe_allow_html=True)
 
 # Initialize session state variables
 if 'index' not in st.session_state:
