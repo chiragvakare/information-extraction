@@ -46,6 +46,14 @@ st.markdown(
         justify-content: space-between;
         align-items: center;
     }
+    .extracted-data {
+        max-height: 300px;
+        overflow-y: auto;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        background-color: #fff;
+    }
     </style>
     """,
     unsafe_allow_html=True
@@ -89,7 +97,10 @@ if st.session_state.reset:
     st.session_state.query = ''
     st.session_state.url = ''
     st.session_state.reset = False
-    # st.experimental_rerun()  # Consider replacing this with a UI mechanism to reload if unavailable
+
+# Search Bar
+st.markdown("<h2 class='header-clear'>Enter Your Question</h2>", unsafe_allow_html=True)
+st.session_state.query = st.text_area("", placeholder="Ask a question based on the processed documents...", max_chars=500, height=100)
 
 # Sidebar for File Upload/URL Input
 with st.sidebar:
@@ -109,16 +120,14 @@ with st.sidebar:
         if text_file and st.button("Extract"):
             st.session_state.content = extract_from_text(text_file)
 
-# Content Chunking and Embedding
+# Content Display and Processing
 if st.session_state.content:
-    # Create a two-column layout
-    col1, col2 = st.columns(2)
+    # Display extracted content with scroller
+    st.markdown("<h3 class='header-clear'>Extracted Content</h3>", unsafe_allow_html=True)
+    st.markdown(f"<div class='extracted-data'>{st.session_state.content}</div>", unsafe_allow_html=True)
     
-    with col1:
-        st.write("Content extracted:")
-        st.write(st.session_state.content)
-    
-    with col2:
+    # Display chunk data in an accordion
+    with st.expander("View Chunked Content"):
         if st.session_state.chunks is None or st.session_state.index is None:
             try:
                 st.session_state.chunks = chunk_content(st.session_state.content)
@@ -135,10 +144,7 @@ if st.session_state.content:
             except Exception as e:
                 st.error(f"An error occurred: {e}")
 
-# User Query Section
-st.markdown("<h2 class='header-clear'>Enter Your Question</h2>", unsafe_allow_html=True)
-st.session_state.query = st.text_area("", placeholder="Ask a question based on the processed documents...", max_chars=500, height=100)
-
+# User Query Section and Processing
 if st.session_state.query and st.button("Search"):
     if st.session_state.index is not None and st.session_state.chunks is not None:
         try:
