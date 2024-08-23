@@ -15,7 +15,7 @@ st.markdown(
         background-color: #f0f4f8;
         font-family: 'Helvetica Neue', Arial, sans-serif;
     }
-    .title { color: #1a73e8; font-weight: bold; font-size: 3rem; text-align: center; }
+    .title { color: red; font-weight: bold; font-size: 3rem; text-align: center; }
     .header { color: #3f51b5; font-weight: bold; font-size: 2.5rem; text-align: center; display: inline-block; }
     .text-input { color: #4caf50; font-weight: bold; }
     .success { color: #28B463; }
@@ -60,7 +60,7 @@ st.markdown(
 )
 
 # Title and Header
-st.markdown("<h1 class='title'>Information Retrieval App</h1>", unsafe_allow_html=True)
+st.markdown("<h1 class='title'>Information Extraction Web Application</h1>", unsafe_allow_html=True)
 st.markdown("<h2 class='header'Conversational Queries with Your Documents</h2>", unsafe_allow_html=True)
 
 # Initialize session state variables
